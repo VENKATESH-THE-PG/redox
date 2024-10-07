@@ -13,18 +13,15 @@ a {
     color: inherit;
 }
 
-/* Sidebar Styles */
+/* Sidebar Styles (Smaller and positioned at the top-right) */
 .sidebar {
     position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 200px;
-    background-color: #111;
+    top: 20px;
+    right: 20px;
+    width: auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
     z-index: 1000;
 }
 
@@ -35,15 +32,16 @@ a {
 }
 
 .sidebar li {
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 .sidebar a {
     color: white;
-    padding: 10px 20px;
-    border-radius: 30px;
+    padding: 8px 15px;
+    border-radius: 20px;
     background-color: #333;
     transition: background-color 0.3s ease;
+    font-size: 0.9em;
 }
 
 .sidebar a:hover {
@@ -82,9 +80,9 @@ header p {
     display: inline-block;
     background-color: #28a745;
     color: white;
-    padding: 15px 30px;
+    padding: 10px 20px;
     margin-top: 20px;
-    border-radius: 30px;
+    border-radius: 20px;
     font-size: 1.2em;
     transition: background-color 0.3s ease;
 }
