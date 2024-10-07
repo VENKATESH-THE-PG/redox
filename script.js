@@ -1,38 +1,40 @@
-// Smooth Scrolling
+// Smooth Scrolling for Section Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         
-        // Get the target section by its href
         const targetSection = document.querySelector(this.getAttribute('href'));
-
-        // Only scroll if the target section exists
+        
+        // Check if the target section exists before scrolling
         if (targetSection) {
             targetSection.scrollIntoView({
                 behavior: 'smooth',
-                block: 'start' // Ensure the section starts at the top of the screen
+                block: 'start'
             });
         } else {
-            console.error(`No section found for ${this.getAttribute('href')}`);
+            console.error('Target section not found:', this.getAttribute('href'));
         }
     });
 });
 
-// Back to Top Button Visibility Logic
+// Back-to-Top Button Logic
 const backToTopButton = document.getElementById("backToTop");
 
-// Only add the scroll event listener if the button exists
-if (backToTopButton) {
-    window.addEventListener("scroll", function() {
-        // Show the button after scrolling down 200px
-        if (window.scrollY > 200) {
-            backToTopButton.style.display = "block";
-        } else {
-            backToTopButton.style.display = "none";
-        }
-    });
+// Function to toggle the visibility of the back-to-top button
+function toggleBackToTop() {
+    if (window.scrollY > 200) {
+        backToTopButton.style.display = "block";
+    } else {
+        backToTopButton.style.display = "none";
+    }
+}
 
-    // Back to Top Smooth Scroll
+// Check if the button exists and add event listeners
+if (backToTopButton) {
+    // Show/hide the button on scroll
+    window.addEventListener("scroll", toggleBackToTop);
+
+    // Scroll smoothly to the top when the button is clicked
     backToTopButton.addEventListener("click", function() {
         window.scrollTo({
             top: 0,
@@ -42,3 +44,6 @@ if (backToTopButton) {
 } else {
     console.error("Back to Top button not found!");
 }
+
+// Initial call to hide the button if page is loaded at the top
+toggleBackToTop();
