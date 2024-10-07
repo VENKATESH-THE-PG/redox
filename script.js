@@ -1,25 +1,34 @@
-// Smooth Scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// Smooth Scrolling for all section links
+document.querySelectorAll('.sidebar a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        
+        const targetSection = document.querySelector(this.getAttribute('href'));
+        if (targetSection) {
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start' // Ensure the section starts at the top of the screen
+            });
+        }
     });
 });
 
-// Back to Top Button Visibility
-const backToTopButton = document.getElementById("backToTop");
+// Back to Top Button Visibility Logic
+const backToTopButton = document.getElementById('backToTop');
 
-window.addEventListener("scroll", function() {
+window.addEventListener('scroll', () => {
+    // Show the button after scrolling down 200px
     if (window.scrollY > 200) {
-        backToTopButton.style.display = "block";
+        backToTopButton.style.display = 'block';
     } else {
-        backToTopButton.style.display = "none";
+        backToTopButton.style.display = 'none';
     }
 });
 
-backToTopButton.addEventListener("click", function() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+// Back to Top Smooth Scroll
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 });
