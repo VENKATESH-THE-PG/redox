@@ -1,18 +1,13 @@
 // Smooth Scrolling for Section Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+document.querySelectorAll('.navbar a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        
         const targetSection = document.querySelector(this.getAttribute('href'));
-        
-        // Check if the target section exists before scrolling
         if (targetSection) {
             targetSection.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
-        } else {
-            console.error('Target section not found:', this.getAttribute('href'));
         }
     });
 });
@@ -20,7 +15,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Back-to-Top Button Logic
 const backToTopButton = document.getElementById("backToTop");
 
-// Function to toggle the visibility of the back-to-top button
 function toggleBackToTop() {
     if (window.scrollY > 200) {
         backToTopButton.style.display = "block";
@@ -29,21 +23,22 @@ function toggleBackToTop() {
     }
 }
 
-// Check if the button exists and add event listeners
-if (backToTopButton) {
-    // Show/hide the button on scroll
-    window.addEventListener("scroll", toggleBackToTop);
+// Show/hide back-to-top button based on scroll position
+window.addEventListener("scroll", toggleBackToTop);
 
-    // Scroll smoothly to the top when the button is clicked
-    backToTopButton.addEventListener("click", function() {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+backToTopButton.addEventListener("click", function () {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
     });
-} else {
-    console.error("Back to Top button not found!");
-}
+});
 
-// Initial call to hide the button if page is loaded at the top
-toggleBackToTop();
+// Sticky Navbar Color Change on Scroll
+window.addEventListener('scroll', function () {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 100) {
+        navbar.style.backgroundColor = '#111';  // Darken the navbar when scrolling
+    } else {
+        navbar.style.backgroundColor = '#333';  // Reset to default when at the top
+    }
+});
