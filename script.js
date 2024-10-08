@@ -1,44 +1,33 @@
-// Smooth Scrolling for Section Links
-document.querySelectorAll('.navbar a').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetSection = document.querySelector(this.getAttribute('href'));
-        if (targetSection) {
-            targetSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+// Smooth Scroll for Sidebar Navigation and Learn More Button
+document.querySelectorAll('.sidebar a, .learn-more').forEach(anchor => {
+    anchor.addEventListener('click', function(event) {
+        event.preventDefault();
+        const targetId = this.getAttribute('href');
+        document.querySelector(targetId).scrollIntoView({
+            behavior: 'smooth'
+        });
     });
 });
 
-// Back-to-Top Button Logic
-const backToTopButton = document.getElementById("backToTop");
+// Back to Top Button
+const backToTopButton = document.getElementById('backToTop');
 
-function toggleBackToTop() {
-    if (window.scrollY > 200) {
+window.onscroll = function() {
+    scrollFunction();
+};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
         backToTopButton.style.display = "block";
     } else {
         backToTopButton.style.display = "none";
     }
 }
 
-// Show/hide back-to-top button based on scroll position
-window.addEventListener("scroll", toggleBackToTop);
-
-backToTopButton.addEventListener("click", function () {
+// When the user clicks on the button, scroll to the top of the document
+backToTopButton.addEventListener('click', function() {
     window.scrollTo({
         top: 0,
-        behavior: "smooth"
+        behavior: 'smooth'
     });
-});
-
-// Sticky Navbar Color Change on Scroll
-window.addEventListener('scroll', function () {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.backgroundColor = '#111';  // Darken the navbar when scrolling
-    } else {
-        navbar.style.backgroundColor = '#333';  // Reset to default when at the top
-    }
 });
